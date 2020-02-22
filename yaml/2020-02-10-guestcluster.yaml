@@ -1,0 +1,24 @@
+apiVersion: gcm.vmware.com/v1alpha1
+kind: ManagedCluster
+metadata:
+  name: guest-cluster-01
+spec:
+  topology:
+    controlPlane:
+      count: 1
+      class: guaranteed-xsmall
+      storageClass: wcp-storage-policy
+    workers:
+      count: 4
+      class: guaranteed-xsmall
+      storageClass: wcp-storage-policy
+  distribution:
+    version: v1.15.5+vmware.1-tkg.1.85123d8
+  settings:
+    network:
+      cni:
+        name: calico
+      services:
+        cidrBlocks: ["198.51.100.0/12"]
+      pods:
+        cidrBlocks: ["192.0.2.0/16"]
